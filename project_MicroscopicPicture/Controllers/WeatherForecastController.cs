@@ -9,7 +9,8 @@ namespace project_MicroscopicPicture.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : ControllerBase 
+        //dkj
     {
         private static readonly string[] Summaries = new[]
         {
