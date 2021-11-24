@@ -12,6 +12,8 @@ namespace project_MicroscopicPicture.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
+//test
+
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -37,5 +39,3 @@ namespace project_MicroscopicPicture.Controllers
         }
     }
 }
-
-//test
