@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL;
+using Microsoft.AspNetCore.Mvc;
 using project_MicroscopicPicture.Models;
 using System;
 using System.Collections.Generic;
