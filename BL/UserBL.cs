@@ -10,24 +10,24 @@ namespace BL
 {
     public class UserBL:IUserBL
     {
-        IUserDl userDL;
-        public async Task Get(string id, string password)
+        IUserDL userDL;
+        public UserBL(IUserDL _userDL)
         {
+            _userDL = userDL;
+        }
+        public async Task<User> Get(string id, string password)
+        {
+            await userDL.Get(id, password);
+            return null;
         }
         public async Task Post(User user)
         {
             userDL.Post(user);
         }
 
-        User IUserBL.Get(string id, string password)
-        {
-            throw new NotImplementedException();
-        }
+       
 
-        User IUserBL.Post(User user)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
    

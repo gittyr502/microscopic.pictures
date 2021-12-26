@@ -13,7 +13,11 @@ namespace project_MicroscopicPicture.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    { IUserBL userBL;
+    {    IUserBL userBL;
+       public UserController(IUserBL _userBL)
+        {
+            _userBL = userBL;
+        }
         // GET: api/<UserController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -23,14 +27,14 @@ namespace project_MicroscopicPicture.Controllers
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> Get(string id,string password)
+        public async Task<User> Get(string id,string password)
         {
-            return userBL.Get(id, password);
+           return userBL.Get(id, password);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public Task Post([FromBody] User user)
+        public async Task Post([FromBody] User user)
         {
              userBL.Post(user);
 

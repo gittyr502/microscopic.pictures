@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-   public interface IUserDl
+   public interface IUserDL
     {
-        User Post(User user);
+        Task Post(User user);
+        Task<User> Get(string id, string password);
     }
 }
