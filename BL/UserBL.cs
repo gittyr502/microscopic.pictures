@@ -13,7 +13,7 @@ namespace BL
         IUserDL userDL;
         public UserBL(IUserDL _userDL)
         {
-            _userDL = userDL;
+            userDL=_userDL;
         }
         public async Task<User> Get(string id, string password)
         {

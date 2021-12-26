@@ -16,7 +16,7 @@ namespace project_MicroscopicPicture.Controllers
     {    IUserBL userBL;
        public UserController(IUserBL _userBL)
         {
-            _userBL = userBL;
+            userBL =_userBL;
         }
         // GET: api/<UserController>
         [HttpGet]
@@ -29,7 +29,7 @@ namespace project_MicroscopicPicture.Controllers
         [HttpGet("{id}")]
         public async Task<User> Get(string id,string password)
         {
-           return userBL.Get(id, password);
+           return await userBL.Get(id, password);
         }
 
         // POST api/<UserController>

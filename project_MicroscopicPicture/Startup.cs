@@ -32,7 +32,7 @@ namespace project_MicroscopicPicture
         {
             services.AddScoped<IUserBL, UserBL>();
             services.AddScoped<IUserDL, UserDL>();
-            services.AddDbContext<MicroscopicPictureContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MicroscopicPicture")));
+            services.AddDbContext<MicroscopicPictureContext>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture;Trusted_Connection=True;"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

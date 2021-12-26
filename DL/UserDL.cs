@@ -11,6 +11,11 @@ namespace DL
    public class UserDL: IUserDL
     {
         MicroscopicPictureContext myDB;
+
+        public UserDL(MicroscopicPictureContext _myDB)
+        {
+            myDB = _myDB;
+        }
         public async Task<User> Get(string id, string password)
         {
            
