@@ -5,8 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+     
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace project_MicroscopicPicture.Controllers
@@ -31,9 +30,9 @@ namespace project_MicroscopicPicture.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] User user)
+        public async Task Post([FromBody] User user)
         {
-            userBL.Post(user);
+           await userBL.Post(user);
 
         }
 

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using project_MicroscopicPicture.Models;
 
- namespace BL
+namespace BL
 {
     public interface IUserBL
     {
         User Get(string id, string password);
+        User Post(User user);
     }
 }
