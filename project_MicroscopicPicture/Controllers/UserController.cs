@@ -30,9 +30,9 @@ namespace project_MicroscopicPicture.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task Post([FromBody] User user)
+        public Task Post([FromBody] User user)
         {
-           await userBL.Post(user);
+             userBL.Post(user);
 
         }
 

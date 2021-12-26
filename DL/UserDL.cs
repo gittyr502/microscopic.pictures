@@ -15,7 +15,6 @@ namespace DL
         {
             await myDB.Users.AddAsync(user);
             await myDB.SaveChangesAsync();
-
         }
     }
 }
