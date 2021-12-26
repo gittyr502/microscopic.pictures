@@ -28,5 +28,8 @@ namespace project_MicroscopicPicture.Models
         public virtual ICollection<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
         public virtual ICollection<Examination> Examinations { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
+
+
+
     }
 }
