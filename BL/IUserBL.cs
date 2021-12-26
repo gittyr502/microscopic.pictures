@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+ namespace BL
 {
-    interface IUserBL
+    public interface IUserBL
     {
     }
 }

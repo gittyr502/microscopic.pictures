@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    interface IUserDl
+   public interface IUserDl
     {
     }
 }

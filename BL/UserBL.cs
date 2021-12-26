@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class UserBL:IUserBL
+    public class UserBL:IUserBL
     {
         IUserDL userDL;
         public User Get(string id, string password)

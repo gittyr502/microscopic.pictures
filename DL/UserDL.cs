@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    class UserDL
+   public class UserDL
     {
     }
 }
