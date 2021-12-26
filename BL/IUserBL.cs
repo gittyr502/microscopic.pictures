@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 {
     public interface IUserBL
     {
+        User Get(string id, string password);
     }
 }
