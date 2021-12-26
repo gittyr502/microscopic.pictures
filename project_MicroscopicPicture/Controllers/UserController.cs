@@ -33,6 +33,7 @@ namespace project_MicroscopicPicture.Controllers
         [HttpPost]
         public void Post([FromBody] User user)
         {
+            userBL.Post(user);
 
         }
 

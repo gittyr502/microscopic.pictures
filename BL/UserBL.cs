@@ -14,6 +14,10 @@ namespace BL
         {
             return
         }
+        public User Post(User user)
+        {
+    User user1 
+        }
 
         
     }
