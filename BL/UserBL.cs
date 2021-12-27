@@ -22,7 +22,7 @@ namespace BL
         }
         public async Task Post(User user)
         {
-            userDL.Post(user);
+            userDL.Post(user); 
         }
 
        
