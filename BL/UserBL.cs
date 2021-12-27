@@ -1,5 +1,5 @@
 ﻿using DL;
-using project_MicroscopicPicture.Models;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

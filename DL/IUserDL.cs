@@ -1,4 +1,4 @@
-﻿using project_MicroscopicPicture.Models;
+﻿using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +11,6 @@ namespace DL
     {
         Task Post(User user);
         Task<User> Get(string id, string password);
+        
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace project_MicroscopicPicture.Models
+namespace Entity
 {
     public partial class UserKind
     {
