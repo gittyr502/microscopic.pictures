@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -16,7 +17,7 @@ namespace Entity
         public string BacteriumName { get; set; }
         public string InformationOfBacterium { get; set; }
         public string Medicine { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<PicturesCollection> PicturesCollections { get; set; }
     }
 }

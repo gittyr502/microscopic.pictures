@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -13,8 +14,9 @@ namespace Entity
         public string DoctorsOpinion { get; set; }
         public string Comment { get; set; }
         public string LinkToImage { get; set; }
-
+        [JsonIgnore]
         public virtual DiscussionGroup DiscussionGroup { get; set; }
+        [JsonIgnore]
         public virtual User Doctor { get; set; }
     }
 }

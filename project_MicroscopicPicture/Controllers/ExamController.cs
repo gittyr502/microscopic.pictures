@@ -15,11 +15,10 @@ namespace project_MicroscopicPicture.Controllers
     public class ExamController : ControllerBase
     {
         IExamBL examBL;
-        // GET: api/<ExamController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        
+       public ExamController(IExamBL _examBL)
         {
-            return new string[] { "value1", "value2" };
+            examBL = _examBL;
         }
 
         // GET api/<ExamController>/5
@@ -28,10 +27,16 @@ namespace project_MicroscopicPicture.Controllers
         {
             return await examBL.GetByExamId(id);
         }
-        [HttpGet("{PatientId}")]
-        public async Task<List<Examination>> GetByPatientID(int PatientId)
+        [HttpGet("getByPatientId/{PatientId}")]
+        public async Task<List<Examination>> GetByPatientId(int PatientId)
         {
-            return await examBL.GetByPatientID(PatientId);
+            return await examBL.GetByPatientId(PatientId);
+        }
+
+        [HttpGet("getByDoctorId/{DoctorId}")]
+        public async Task<List<Examination>> GetByDoctorId(int DoctorId)
+        {
+            return await examBL.GetByDoctorId(DoctorId);
         }
         // POST api/<ExamController>
         [HttpPost]
@@ -41,16 +46,5 @@ namespace project_MicroscopicPicture.Controllers
 
         }
 
-        // PUT api/<ExamController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ExamController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

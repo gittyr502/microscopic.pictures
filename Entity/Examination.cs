@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -23,10 +24,13 @@ namespace Entity
         public string LinkToFile { get; set; }
         public string TissueCultureResult { get; set; }
         public string Comments { get; set; }
-
+        [JsonIgnore]
         public virtual User Doctor { get; set; }
+        [JsonIgnore]
         public virtual Patient Patient { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DiscussionGroup> DiscussionGroupDiagnosisNavigations { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DiscussionGroup> DiscussionGroupExaminations { get; set; }
     }
 }

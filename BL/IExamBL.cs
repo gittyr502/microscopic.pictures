@@ -11,6 +11,7 @@ namespace BL
     {
        Task Post(Examination exam);
         Task<Examination> GetByExamId(int id);
-        Task<List<Examination>> GetByPatientID(int PatientId); 
+        Task<List<Examination>> GetByPatientId(int PatientId);
+        Task<List<Examination>> GetByDoctorId(int _DoctorId);
     }
 }

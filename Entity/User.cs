@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -23,10 +24,13 @@ namespace Entity
         public string Phone { get; set; }
         public bool SendInEmail { get; set; }
         public bool SendInPhone { get; set; }
-
+        [JsonIgnore]
         public virtual UserKind UserKind { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Examination> Examinations { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Patient> Patients { get; set; }
 
 

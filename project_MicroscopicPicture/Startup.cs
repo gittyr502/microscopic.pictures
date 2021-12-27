@@ -30,8 +30,13 @@ namespace project_MicroscopicPicture
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddScoped<IUserBL, UserBL>();
+            services.AddScoped<IExamBL, ExamBL>();
+            services.AddScoped<IExamDL, ExamDL>();
             services.AddScoped<IUserDL, UserDL>();
+            services.AddScoped<IPicturesBL, PicturesBL>();
+            services.AddScoped<IPicturesDL, PicturesDL>();
             services.AddDbContext<MicroscopicPictureContext>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture;Trusted_Connection=True;"),ServiceLifetime.Scoped);
             services.AddControllers();
             services.AddSwaggerGen(c =>

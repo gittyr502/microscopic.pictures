@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 using Entity;
 namespace BL
 {
-    public class ExamBL
+    public class ExamBL:IExamBL
     {
         IExamDL examDL;
+        public ExamBL(IExamDL _examDL)
+        {
+            examDL = _examDL;
+        }
       public async Task Post(Examination exam)
         {
            examDL.Post(exam);
@@ -21,6 +25,10 @@ namespace BL
         public async Task<List<Examination>> GetByPatientId(int PatientId)
         {
             return await examDL.GetByPatientId(PatientId);
+        }
+        public async Task<List<Examination>> GetByDoctorId(int DoctorId)
+        {
+            return await examDL.GetByPatientId(DoctorId);
         }
     }
 }

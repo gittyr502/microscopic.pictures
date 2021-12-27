@@ -17,8 +17,8 @@ namespace BL
         }
         public async Task<User> Get(string id, string password)
         {
-            await userDL.Get(id, password);
-            return null;
+           return await userDL.Get(id, password);
+            
         }
         public async Task Post(User user)
         {
