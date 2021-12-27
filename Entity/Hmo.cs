@@ -16,6 +16,6 @@ namespace Entity
         public int Id { get; set; }
         public string NameOfHmo { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Patient> Patients { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; } 
     }
 }
