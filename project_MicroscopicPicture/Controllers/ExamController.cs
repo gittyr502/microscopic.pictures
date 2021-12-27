@@ -38,6 +38,13 @@ namespace project_MicroscopicPicture.Controllers
         {
             return await examBL.GetByDoctorId(DoctorId);
         }
+
+        [HttpGet("getByDate/{Date}")]
+
+        public async Task<List<Examination>>GetByDate(DateTime date)
+        {
+            return await examBL.GetByDate(date);
+        }
         // POST api/<ExamController>
         [HttpPost]
         public async void Post([FromBody] Examination _exam)

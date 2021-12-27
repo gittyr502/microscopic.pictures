@@ -35,7 +35,6 @@ namespace project_MicroscopicPicture.Controllers
 
         }
 
-       
 
         
     }

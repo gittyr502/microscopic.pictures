@@ -30,5 +30,10 @@ namespace BL
         {
             return await examDL.GetByPatientId(DoctorId);
         }
+
+        public async Task<List<Examination>> GetByDate(DateTime date)
+        {
+            return await examDL.GetByDate(date);
+        }
     }
 }

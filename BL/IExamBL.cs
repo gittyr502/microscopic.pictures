@@ -13,5 +13,7 @@ namespace BL
         Task<Examination> GetByExamId(int id);
         Task<List<Examination>> GetByPatientId(int PatientId);
         Task<List<Examination>> GetByDoctorId(int _DoctorId);
+
+        Task<List<Examination>> GetByDate(DateTime date);
     }
 }

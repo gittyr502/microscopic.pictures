@@ -51,5 +51,15 @@ namespace DL
             }
             return null;
         }
+
+        public async Task<List<Examination>> GetByDate(DateTime date)
+        {
+            List< Examination > examList = await myDB.Examinations.Where(e => e.ExaminationDate.Equals(date.Date)).ToListAsync<Examination>();
+            if (examList!=null)
+            {
+                return examList;
+            }
+            return null;
+        }
     }
 }
