@@ -11,6 +11,6 @@ namespace DL
     {
         Task Post(Examination exam);
         Task<Examination> GetByExamId(int id);
-        Examination GetByPatientId(int PatientId);
+        Task<List<Examination>> GetByPatientId(int PatientId);
     }
 }

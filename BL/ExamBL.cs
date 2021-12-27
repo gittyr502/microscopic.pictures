@@ -16,11 +16,11 @@ namespace BL
         }
         public async Task<Examination> GetByExamId(int id)
         {
-            return examDL.GetByExamId(id);
+            return await examDL.GetByExamId(id);
         }
-        public async Task<Examination> GetByPatientId(int PatientId)
+        public async Task<List<Examination>> GetByPatientId(int PatientId)
         {
-            return examDL.GetByPatientId(PatientId);
+            return await examDL.GetByPatientId(PatientId);
         }
     }
 }

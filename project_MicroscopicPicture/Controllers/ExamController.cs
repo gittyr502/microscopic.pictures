@@ -1,6 +1,6 @@
 ﻿using BL;
 using Microsoft.AspNetCore.Mvc;
-using project_MicroscopicPicture.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +26,12 @@ namespace project_MicroscopicPicture.Controllers
         [HttpGet("{id}")]
         public async Task<Examination> GetByExamId(int id)
         {
-            return examBL.GetByExamId(id);
+            return await examBL.GetByExamId(id);
         }
         [HttpGet("{PatientId}")]
         public async Task<List<Examination>> GetByPatientID(int PatientId)
         {
-            return examBL.GetByPatientID(PatientId);
+            return await examBL.GetByPatientID(PatientId);
         }
         // POST api/<ExamController>
         [HttpPost]
