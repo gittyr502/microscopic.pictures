@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-
+using Entity;
 #nullable disable
 
-namespace project_MicroscopicPicture.Models
+namespace DL
 {
     public partial class MicroscopicPictureContext : DbContext
     {

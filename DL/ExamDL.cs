@@ -17,18 +17,18 @@ namespace DL
             await myDB.Examinations.AddAsync(exam);
             await myDB.SaveChangesAsync();
         }
-        public async Task<Examination> GetByExamID<Examination>(int id)
+        public async Task<Examination> GetByExamID(int id)
         {
-            Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
+           Entity.Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
             if (e != null)
             {
                 return e;
             }
             return default(Examination);
         }
-        public async Task<List<Examination>> GetByPatientId<Examination>(int PatientId)
+        public async Task<List<Examination>> GetByPatientId(int PatientId)
         {
-           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(PatientId).FirstOrDefaultAsync();
+           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(PatientId)).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;
