@@ -30,14 +30,15 @@ namespace project_MicroscopicPicture
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddScoped<IRatingDL, RatingDL>();
+            services.AddScoped<IRatingBL, RatingBL>();
             services.AddScoped<IUserBL, UserBL>();
             services.AddScoped<IExamBL, ExamBL>();
             services.AddScoped<IExamDL, ExamDL>();
             services.AddScoped<IUserDL, UserDL>();
             services.AddScoped<IPicturesBL, PicturesBL>();
             services.AddScoped<IPicturesDL, PicturesDL>();
-            services.AddDbContext<MicroscopicPictureContext>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture;Trusted_Connection=True;"),ServiceLifetime.Scoped);
+            services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"),ServiceLifetime.Scoped);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,7 +55,14 @@ namespace project_MicroscopicPicture
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "project_MicroscopicPicture v1"));
             }
-
+            app.Run(async (context) =>
+            {
+                context.Request.Host;
+                context.Request.Method;
+                context.Request.Path;
+                context.Request.
+            }
+            );
             app.UseHttpsRedirection();
 
             app.UseRouting();

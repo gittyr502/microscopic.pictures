@@ -10,26 +10,27 @@ namespace DL
 {
    public class UserDL: IUserDL
     {
-        MicroscopicPictureContext myDB;
+        MicroscopicPicture1Context myDB;
 
-        public UserDL(MicroscopicPictureContext _myDB)
+        public UserDL(MicroscopicPicture1Context _myDB)
         {
             myDB = _myDB;
         }
         public async Task<User> Get(string id, string password)
         {
            
-            User u = await myDB.Users.Where(u =>  u.Id.Equals(id)).FirstOrDefaultAsync();
+            User u = await myDB.Users.Where(u =>  u.Id.Equals(id)&&u.Password.Equals(password)).FirstOrDefaultAsync();
             if (u != null)
             {
                 return u;
             }
             return null;
         }
-        public async Task Post(User user)
+        public async Task<int> Post(User user)
         {
             await myDB.Users.AddAsync(user);
             await myDB.SaveChangesAsync();
+            return user.Id;
         }
     }
 }   

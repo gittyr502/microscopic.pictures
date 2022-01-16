@@ -9,9 +9,9 @@ namespace DL
 {
     public class PicturesDL:IPicturesDL
     {
-        MicroscopicPictureContext myDB;
+        MicroscopicPicture1Context myDB;
 
-        public PicturesDL(MicroscopicPictureContext _myDB)
+        public PicturesDL(MicroscopicPicture1Context _myDB)
         {
             myDB = _myDB;
         }

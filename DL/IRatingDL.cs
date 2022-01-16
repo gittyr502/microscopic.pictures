@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DL
+namespace BL
 {
-   public interface IUserDL
+    public interface IRatingDL
     {
-        Task<int> Post(User user);
-        Task<User> Get(string id, string password);
         
+
+       Task Post(Rating rating);
     }
 }

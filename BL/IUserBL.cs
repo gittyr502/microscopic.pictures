@@ -9,7 +9,7 @@ namespace BL
     public interface IUserBL
     {
         Task<User> Get(string id, string password);
-        Task Post(User user);
+        Task<int> Post(User user);
     }
 }
 

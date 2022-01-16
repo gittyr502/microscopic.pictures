@@ -1,18 +1,19 @@
 ﻿using System;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Entity;
+
 #nullable disable
 
-namespace DL
+namespace project_MicroscopicPicture.Models
 {
-    public partial class MicroscopicPictureContext : DbContext
+    public partial class MicroscopicPicture1Context : DbContext
     {
-        public MicroscopicPictureContext()
+        public MicroscopicPicture1Context()
         {
         }
 
-        public MicroscopicPictureContext(DbContextOptions<MicroscopicPictureContext> options)
+        public MicroscopicPicture1Context(DbContextOptions<MicroscopicPicture1Context> options)
             : base(options)
         {
         }
@@ -32,7 +33,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MicroscopicPicture1;Trusted_Connection=True;");
             }
         }
 
@@ -44,7 +45,7 @@ namespace DL
             {
                 entity.ToTable("bacteriums");
 
-                entity.HasIndex(e => e.BacteriumName, "UQ__bacteriu__4899459B41015EEA")
+                entity.HasIndex(e => e.BacteriumName, "UQ__bacteriu__D916BCF126D87F10")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -81,13 +82,13 @@ namespace DL
                     .WithMany(p => p.DiscussionGroupDiagnosisNavigations)
                     .HasForeignKey(d => d.Diagnosis)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__discussio__diagn__4F7CD00D");
+                    .HasConstraintName("FK__discussio__diagn__37A5467C");
 
                 entity.HasOne(d => d.Examination)
                     .WithMany(p => p.DiscussionGroupExaminations)
                     .HasForeignKey(d => d.ExaminationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__discussio__exami__4E88ABD4");
+                    .HasConstraintName("FK__discussio__exami__38996AB5");
             });
 
             modelBuilder.Entity<DoctorsInDiscussionGroup>(entity =>
@@ -110,20 +111,20 @@ namespace DL
                     .HasColumnName("doctors_opinion");
 
                 entity.Property(e => e.LinkToImage)
-                    .HasColumnType("ntext")
+                    .HasColumnType("image")
                     .HasColumnName("link_to_image");
 
                 entity.HasOne(d => d.DiscussionGroup)
                     .WithMany(p => p.DoctorsInDiscussionGroups)
                     .HasForeignKey(d => d.DiscussionGroupId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__doctorsIn__discu__534D60F1");
+                    .HasConstraintName("FK__doctors_i__discu__398D8EEE");
 
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.DoctorsInDiscussionGroups)
                     .HasForeignKey(d => d.DoctorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__doctorsIn__docto__52593CB8");
+                    .HasConstraintName("FK__doctors_i__docto__3A81B327");
             });
 
             modelBuilder.Entity<Examination>(entity =>
@@ -168,20 +169,20 @@ namespace DL
                     .WithMany(p => p.Examinations)
                     .HasForeignKey(d => d.DoctorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__examinati__docto__45F365D3");
+                    .HasConstraintName("FK__examinati__docto__3B75D760");
 
                 entity.HasOne(d => d.Patient)
                     .WithMany(p => p.Examinations)
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__examinati__patie__44FF419A");
+                    .HasConstraintName("FK__examinati__patie__3C69FB99");
             });
 
             modelBuilder.Entity<Hmo>(entity =>
             {
                 entity.ToTable("HMO");
 
-                entity.HasIndex(e => e.NameOfHmo, "UQ__HMO__6F10FF69C4A30115")
+                entity.HasIndex(e => e.NameOfHmo, "UQ__HMO__5DDB05EA5570EFCC")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -202,18 +203,7 @@ namespace DL
                     .HasColumnType("datetime")
                     .HasColumnName("birthDate");
 
-                entity.Property(e => e.FullName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("full_name");
-
                 entity.Property(e => e.HmoId).HasColumnName("HMO_id");
-
-                entity.Property(e => e.IdNumOfMember)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("idNum_of_member")
-                    .IsFixedLength(true);
 
                 entity.Property(e => e.MedicalInformation)
                     .HasColumnType("ntext")
@@ -225,13 +215,13 @@ namespace DL
                     .WithMany(p => p.Patients)
                     .HasForeignKey(d => d.HmoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__patients__HMOid__4222D4EF");
+                    .HasConstraintName("FK__patients__HMO_id__3D5E1FD2");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Patients)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__patients__userId__412EB0B6");
+                    .HasConstraintName("FK__patients__user_i__3E52440B");
             });
 
             modelBuilder.Entity<PicturesCollection>(entity =>
@@ -243,22 +233,21 @@ namespace DL
                 entity.Property(e => e.BacteriumId).HasColumnName("bacteriumId");
 
                 entity.Property(e => e.LinkToImage)
-                    .IsRequired()
-                    .HasColumnType("ntext")
-                    .HasColumnName("linkToImage");
+                    .HasColumnType("image")
+                    .HasColumnName("link_to_image");
 
                 entity.HasOne(d => d.Bacterium)
                     .WithMany(p => p.PicturesCollections)
                     .HasForeignKey(d => d.BacteriumId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__picturesC__bacte__4BAC3F29");
+                    .HasConstraintName("FK__pictures___bacte__3F466844");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("users");
 
-                entity.HasIndex(e => e.IdNumber, "UQ__users__8A576AB10780B735")
+                entity.HasIndex(e => e.IdNumber, "UQ__users__D58CDE111573D34B")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -284,14 +273,14 @@ namespace DL
                     .HasMaxLength(50)
                     .HasColumnName("last_name");
 
+                entity.Property(e => e.Password)
+                    .HasMaxLength(30)
+                    .HasColumnName("password");
+
                 entity.Property(e => e.Phone)
                     .HasMaxLength(10)
                     .HasColumnName("phone")
                     .IsFixedLength(true);
-
-                entity.Property(e => e.SendInEmail).HasColumnName("send_in_email");
-
-                entity.Property(e => e.SendInPhone).HasColumnName("send_in_phone");
 
                 entity.Property(e => e.UserKindId).HasColumnName("user_kind_id");
 
@@ -299,14 +288,14 @@ namespace DL
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.UserKindId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__users__userKindI__3A81B327");
+                    .HasConstraintName("FK__users__user_kind__403A8C7D");
             });
 
             modelBuilder.Entity<UserKind>(entity =>
             {
                 entity.ToTable("user_kind");
 
-                entity.HasIndex(e => e.UserKind1, "UQ__userKind__B324209213DBE4C1")
+                entity.HasIndex(e => e.UserKind1, "UQ__user_kin__3CBE27CC97269827")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");

@@ -11,8 +11,8 @@ namespace DL
 {
     public class ExamDL: IExamDL
     {
-        MicroscopicPictureContext myDB;
-        public ExamDL(MicroscopicPictureContext _myDB)
+        MicroscopicPicture1Context myDB;
+        public ExamDL(MicroscopicPicture1Context _myDB)
         {
             myDB = _myDB;
                 

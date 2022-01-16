@@ -21,7 +21,7 @@ namespace project_MicroscopicPicture.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}+{password}")]
+        [HttpGet("{id}/{password}")]
         public async Task<User> Get(string id,string password)
         {
            return await userBL.Get(id, password);
@@ -29,9 +29,9 @@ namespace project_MicroscopicPicture.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public async Task Post([FromBody] User user)
+        public async Task<int> Post([FromBody] User user)
         {
-             userBL.Post(user);
+            return await userBL.Post(user);
 
         }
 

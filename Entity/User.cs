@@ -22,18 +22,18 @@ namespace Entity
         public int UserKindId { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public bool SendInEmail { get; set; }
-        public bool SendInPhone { get; set; }
+        public string Password { get; set; }
+
         [JsonIgnore]
         public virtual UserKind UserKind { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Examination> Examinations { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Patient> Patients { get; set; }
-
-
-
     }
 }

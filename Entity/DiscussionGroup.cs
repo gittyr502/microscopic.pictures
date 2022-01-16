@@ -16,10 +16,13 @@ namespace Entity
         public int Id { get; set; }
         public int ExaminationId { get; set; }
         public int Diagnosis { get; set; }
+
         [JsonIgnore]
         public virtual Examination DiagnosisNavigation { get; set; }
+        
         [JsonIgnore]
         public virtual Examination Examination { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
     }

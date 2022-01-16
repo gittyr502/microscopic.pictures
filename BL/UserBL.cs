@@ -20,9 +20,9 @@ namespace BL
            return await userDL.Get(id, password);
             
         }
-        public async Task Post(User user)
+        public async Task<int> Post(User user)
         {
-            userDL.Post(user); 
+            return await userDL.Post(user); 
         }
 
        
