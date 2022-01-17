@@ -1,4 +1,5 @@
 ﻿using BL;
+using Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -20,9 +21,18 @@ namespace project_MicroscopicPicture
             _next = next;
         }
 
-        public async Task Invoke(HttpContext httpContext,IRatingBL _ratingBL)
-        {httpContext.User
-            ratingBL = _ratingBL;
+        public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL)
+        { ratingBL = _ratingBL;
+
+            Rating rating = (
+                host: httpContext.Request.Host.Host,
+   method: httpContext.Request.Method,
+   path: httpContext.Request.Path,
+   referer: httpContext.Request.Form
+//user_agent:httpContext.Request.
+);
+            };
+
             return _next(httpContext);
         }
     }

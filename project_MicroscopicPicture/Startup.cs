@@ -57,10 +57,7 @@ namespace project_MicroscopicPicture
             }
             app.Run(async (context) =>
             {
-                context.Request.Host;
-                context.Request.Method;
-                context.Request.Path;
-                context.Request.
+                
             }
             );
             app.UseHttpsRedirection();
