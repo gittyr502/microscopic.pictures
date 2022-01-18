@@ -24,15 +24,15 @@ namespace project_MicroscopicPicture
         public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL)
         { ratingBL = _ratingBL;
 
-            Rating rating = (
-                host: httpContext.Request.Host.Host,
-   method: httpContext.Request.Method,
-   path: httpContext.Request.Path,
-   referer: httpContext.Request.Form
-//user_agent:httpContext.Request.
-);
-            };
-
+            Rating rating{
+            host: httpContext.Request.Host.Host,
+                method: httpContext.Request.Method.ToString,
+                path: httpContext.Request.Path.Value,
+                user_agent: "",
+            referer: "",
+            record_date: ""
+             };
+            
             return _next(httpContext);
         }
     }

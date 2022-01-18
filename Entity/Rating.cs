@@ -5,6 +5,7 @@ namespace Entity
 {
     public partial class Rating
     {
+        
         public int RatingId { get; set; }
         public string Host { get; set; }
         public string Method { get; set; }
