@@ -40,6 +40,7 @@ namespace project_MicroscopicPicture
             services.AddScoped<IPicturesDL, PicturesDL>();
             services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"),ServiceLifetime.Scoped);
             services.AddControllers();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "project_MicroscopicPicture", Version = "v1" });
@@ -55,17 +56,23 @@ namespace project_MicroscopicPicture
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "project_MicroscopicPicture v1"));
             }
-            app.Run(async (context) =>
-            {
-                
-            }
-            );
+           
             app.UseHttpsRedirection();
 
             app.UseRouting();
+             app.Map("/api", (app1) =>
+            {
+                app1.UseRouting();
+                app1.UseMiddleware();
+                app1.UseMiddleware1();
+                app1.UseAuthorization();
+                app1.UseEndpoints(endpoints => endpoints.MapControllers());
+            });
+           
+           
 
-            app.UseAuthorization();
 
+             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

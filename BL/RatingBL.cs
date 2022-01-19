@@ -21,6 +21,7 @@ namespace BL
         public async Task Post(Rating rating)
         {
             await ratingDl.Post(rating);
+            return;
         }
 
     }

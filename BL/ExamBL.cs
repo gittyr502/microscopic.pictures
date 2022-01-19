@@ -28,7 +28,7 @@ namespace BL
         }
         public async Task<List<Examination>> GetByDoctorId(int DoctorId)
         {
-            return await examDL.GetByPatientId(DoctorId);
+            return await examDL.GetByDoctorId(DoctorId);
         }
 
         public async Task<List<Examination>> GetByDate(DateTime date)

@@ -19,6 +19,8 @@ namespace BL
         {
             await myDB.Rating.AddAsync(rating);
             await myDB.SaveChangesAsync();
+            return;
+            
         }
     }
 }

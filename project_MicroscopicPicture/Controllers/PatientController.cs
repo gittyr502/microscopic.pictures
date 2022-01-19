@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BL;
 using Entity;
+//git
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,7 +21,7 @@ namespace project_MicroscopicPicture.Controllers
         {
             patientBL = _patientBL;
         }
-        
+
         // POST api/<PatientController>
         [HttpPost]
         public async Task Post([FromBody] Patient patient)

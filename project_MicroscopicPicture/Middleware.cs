@@ -2,9 +2,11 @@
 using Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace project_MicroscopicPicture
@@ -15,25 +17,29 @@ namespace project_MicroscopicPicture
         IRatingBL ratingBL;
 
         private readonly RequestDelegate _next;
+       
 
         public Middleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL)
+        public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL, ILogger<Middleware> logger)
         { ratingBL = _ratingBL;
 
-            Rating rating{
-            host: httpContext.Request.Host.Host,
-                method: httpContext.Request.Method.ToString,
-                path: httpContext.Request.Path.Value,
-                user_agent: "",
-            referer: "",
-            record_date: ""
-             };
-            
-            return _next(httpContext);
+            Rating rating = new Rating {
+                Host = httpContext.Request.Host.Host,
+                Method = httpContext.Request.Method,
+                Path = httpContext.Request.Path.Value,
+                UserAgent = httpContext.Request.Headers["User-Agent"].ToString(),
+                Referer = httpContext.Request.Headers["Referrer"],
+                RecordDate = DateTime.Now
+            };
+          await  ratingBL.Post(rating);
+          await  _next(httpContext);
+             
+           
+
         }
     }
 
