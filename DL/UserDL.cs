@@ -19,18 +19,21 @@ namespace DL
         public async Task<User> Get(string id, string password)
         {
            
-            User u = await myDB.Users.Where(u =>  u.Id.Equals(id)&&u.Password.Equals(password)).FirstOrDefaultAsync();
+            User u = await myDB.Users.Where(u =>  u.IdNumber.Equals(id)&&u.Password.Equals(password)).FirstOrDefaultAsync();
             if (u != null)
             {
                 return u;
             }
             return null;
         }
+
         public async Task<int> Post(User user)
         {
             await myDB.Users.AddAsync(user);
             await myDB.SaveChangesAsync();
             return user.Id;
         }
+
+
     }
 }   

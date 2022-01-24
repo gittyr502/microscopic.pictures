@@ -31,14 +31,16 @@ namespace project_MicroscopicPicture.Controllers
 
         // PUT api/<PatientController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(int id,[FromBody] Patient patient)
         {
+            patientBL.Put(patient);
         }
 
         // DELETE api/<PatientController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            patientBL.Delete(id);
         }
     }
 }

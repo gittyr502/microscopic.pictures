@@ -10,5 +10,7 @@ namespace DL
     public interface IPatientDL
     {
         Task Post(Patient patient);
+        Task Put(Patient patient);
+        Task Delete(int id);
     }
 }

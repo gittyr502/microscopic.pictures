@@ -38,6 +38,12 @@ namespace project_MicroscopicPicture
             services.AddScoped<IUserDL, UserDL>();
             services.AddScoped<IPicturesBL, PicturesBL>();
             services.AddScoped<IPicturesDL, PicturesDL>();
+            services.AddScoped<IPatientBL, PatientBL>();
+            services.AddScoped<IPatientDL, PatientDL>();
+         
+            services.AddScoped<IPicturesBL, PicturesBL>();
+            services.AddScoped<IPicturesDL, PicturesDL>();
+
             services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"),ServiceLifetime.Scoped);
             services.AddControllers();
             
@@ -56,22 +62,17 @@ namespace project_MicroscopicPicture
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "project_MicroscopicPicture v1"));
             }
-           
+            app.UseMiddleware();
+            app.UseMiddleware1();
             app.UseHttpsRedirection();
 
             app.UseRouting();
              app.Map("/api", (app1) =>
             {
                 app1.UseRouting();
-                app1.UseMiddleware();
-                app1.UseMiddleware1();
                 app1.UseAuthorization();
                 app1.UseEndpoints(endpoints => endpoints.MapControllers());
             });
-           
-           
-
-
              app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

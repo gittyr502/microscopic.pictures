@@ -10,5 +10,7 @@ namespace BL
     public interface IPatientBL
     {
         Task Post(Patient patient);
+        Task Put(Patient patient);
+        Task Delete(int id);
     }
 }

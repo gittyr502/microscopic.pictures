@@ -20,5 +20,14 @@ namespace BL
         {
              patientDL.Post(patient);
         }
+        public async Task Put( Patient patient)
+        {
+            patientDL.Put(patient);
+        }
+
+        public async Task Delete(int id)
+        {
+            patientDL.Delete(id);
+        }
     }
 }
