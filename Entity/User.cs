@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 #nullable disable
@@ -17,12 +18,16 @@ namespace Entity
 
         public int Id { get; set; }
         public string IdNumber { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int UserKindId { get; set; }
         public string Email { get; set; }
+        [EmailAddress]
         public string Phone { get; set; }
+        [Phone]
         public string Password { get; set; }
+        [Required]
 
         [JsonIgnore]
         public virtual UserKind UserKind { get; set; }
