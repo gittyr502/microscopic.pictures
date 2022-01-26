@@ -25,7 +25,7 @@ namespace DL
         }
         public async Task<Examination> GetByExamId(int id)
         {
-           Entity.Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
+           Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
             if (e != null)
             {
                 return e;

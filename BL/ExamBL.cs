@@ -16,7 +16,7 @@ namespace BL
         }
       public async Task Post(Examination exam)
         {
-           examDL.Post(exam);
+         await  examDL.Post(exam);
         }
         public async Task<Examination> GetByExamId(int id)
         {

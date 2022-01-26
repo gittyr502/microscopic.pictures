@@ -26,7 +26,7 @@ namespace project_MicroscopicPicture.Controllers
         [HttpPost]
         public async void Post([FromBody] PicturesCollection picture)
         {
-            picturesBL.Post(picture);
+            await picturesBL.Post(picture);
         }
 
     }
