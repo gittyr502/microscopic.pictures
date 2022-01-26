@@ -26,21 +26,21 @@ namespace project_MicroscopicPicture.Controllers
         [HttpPost]
         public async Task Post([FromBody] Patient patient)
         {
-            patientBL.Post(patient);
+            await patientBL.Post(patient);
         }
 
         // PUT api/<PatientController>/5
         [HttpPut("{id}")]
         public async Task Put(int id,[FromBody] Patient patient)
         {
-            patientBL.Put(patient);
+            await patientBL.Put(patient);
         }
 
         // DELETE api/<PatientController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            patientBL.Delete(id);
+            await patientBL.Delete(id);
         }
     }
 }

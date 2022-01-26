@@ -22,7 +22,7 @@ namespace DL
         }
         public async Task Put(Patient patient)
         {
-            myDB.Patients.Update(patient);
+             myDB.Patients.Update(patient);
             await myDB.SaveChangesAsync();
         }
 

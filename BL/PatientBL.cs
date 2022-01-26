@@ -18,16 +18,16 @@ namespace BL
         }
         public async Task Post(Patient patient)
         {
-             patientDL.Post(patient);
+            await patientDL.Post(patient);
         }
         public async Task Put( Patient patient)
         {
-            patientDL.Put(patient);
+            await patientDL.Put(patient);
         }
 
         public async Task Delete(int id)
         {
-            patientDL.Delete(id);
+           await patientDL.Delete(id);
         }
     }
 }

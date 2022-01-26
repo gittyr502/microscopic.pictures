@@ -49,7 +49,7 @@ namespace project_MicroscopicPicture.Controllers
         [HttpPost]
         public async void Post([FromBody] Examination _exam)
         {
-            examBL.Post(_exam);
+            await examBL.Post(_exam);
 
         }
 

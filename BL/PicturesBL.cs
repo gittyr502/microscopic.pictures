@@ -17,7 +17,7 @@ namespace BL
         }
         public async Task Post(PicturesCollection picture)
         {
-            picturesDL.Post(picture);
+            await picturesDL.Post(picture);
         }
     }
 }
