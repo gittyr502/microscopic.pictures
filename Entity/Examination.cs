@@ -18,21 +18,20 @@ namespace Entity
         public int PatientId { get; set; }
         public DateTime ExaminationDate { get; set; }
         public int DoctorId { get; set; }
-        public string ComputerDiagnosis { get; set; }
-        public string DoctorDiagnosis { get; set; }
-        public string PrescriptionName { get; set; }
         public string LinkToFile { get; set; }
-        public string TissueCultureResult { get; set; }
-        public string Comments { get; set; }
-
+        public string LabyrinthComments { get; set; }
+        public string ComputerComments { get; set; }
+        public bool ComputerDiagnosis { get; set; }
+        public bool? LabyrinthDiagnosis { get; set; }
+        public double Probability { get; set; }
+        public string DoctorComments { get; set; }
         [JsonIgnore]
         public virtual User Doctor { get; set; }
-
         [JsonIgnore]
         public virtual Patient Patient { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<DiscussionGroup> DiscussionGroupDiagnosisNavigations { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DiscussionGroup> DiscussionGroupExaminations { get; set; }
     }
 }

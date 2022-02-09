@@ -15,7 +15,6 @@ namespace Entity
 
         public int Id { get; set; }
         public string UserKind1 { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }

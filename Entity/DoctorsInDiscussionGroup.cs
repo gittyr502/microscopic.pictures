@@ -14,10 +14,8 @@ namespace Entity
         public string DoctorsOpinion { get; set; }
         public string Comment { get; set; }
         public byte[] LinkToImage { get; set; }
-
         [JsonIgnore]
         public virtual DiscussionGroup DiscussionGroup { get; set; }
-
         [JsonIgnore]
         public virtual User Doctor { get; set; }
     }

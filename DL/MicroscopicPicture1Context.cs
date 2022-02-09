@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -26,53 +25,22 @@ namespace DL
         public virtual DbSet<Hmo> Hmos { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PicturesCollection> PicturesCollections { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserKind> UserKinds { get; set; }
-        public virtual DbSet<Rating> Rating { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MicroscopicPicture1;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=SRV2\\PUPILS;Database=MicroscopicPicture1;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Hebrew_CI_AS");
-
-            modelBuilder.Entity<Rating>(entity =>
-            {
-                entity.ToTable("RATING");
-
-                entity.Property(e => e.RatingId).HasColumnName("RATING_ID");
-
-                entity.Property(e => e.Host)
-                    .HasColumnName("HOST")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Method)
-                    .HasColumnName("METHOD")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-
-                entity.Property(e => e.Path)
-                    .HasColumnName("PATH")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.RecordDate)
-                 .HasColumnName("Record_Date")
-                 .HasColumnType("datetime");
-
-                entity.Property(e => e.Referer)
-                    .HasColumnName("REFERER")
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.UserAgent).HasColumnName("USER_AGENT");
-            });
-
 
             modelBuilder.Entity<Bacterium>(entity =>
             {
@@ -166,17 +134,16 @@ namespace DL
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Comments)
+                entity.Property(e => e.ComputerComments)
                     .HasColumnType("ntext")
-                    .HasColumnName("comments");
+                    .HasColumnName("computer_comments");
 
-                entity.Property(e => e.ComputerDiagnosis)
-                    .HasColumnType("ntext")
-                    .HasColumnName("computer_diagnosis");
+                entity.Property(e => e.ComputerDiagnosis).HasColumnName("computer_diagnosis");
 
-                entity.Property(e => e.DoctorDiagnosis)
-                    .HasColumnType("ntext")
-                    .HasColumnName("doctor_diagnosis");
+                entity.Property(e => e.DoctorComments)
+                    .HasMaxLength(10)
+                    .HasColumnName("doctor_comments")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.DoctorId).HasColumnName("doctor_id");
 
@@ -184,19 +151,20 @@ namespace DL
                     .HasColumnType("datetime")
                     .HasColumnName("examination_date");
 
+                entity.Property(e => e.LabyrinthComments)
+                    .HasColumnType("ntext")
+                    .HasColumnName("labyrinth_comments");
+
+                entity.Property(e => e.LabyrinthDiagnosis).HasColumnName("labyrinth_diagnosis");
+
                 entity.Property(e => e.LinkToFile)
+                    .IsRequired()
                     .HasColumnType("ntext")
                     .HasColumnName("link_to_file");
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
 
-                entity.Property(e => e.PrescriptionName)
-                    .HasColumnType("ntext")
-                    .HasColumnName("prescription_name");
-
-                entity.Property(e => e.TissueCultureResult)
-                    .HasColumnType("ntext")
-                    .HasColumnName("tissue_culture_result");
+                entity.Property(e => e.Probability).HasColumnName("probability");
 
                 entity.HasOne(d => d.Doctor)
                     .WithMany(p => p.Examinations)
@@ -238,10 +206,6 @@ namespace DL
 
                 entity.Property(e => e.HmoId).HasColumnName("HMO_id");
 
-                entity.Property(e => e.MedicalInformation)
-                    .HasColumnType("ntext")
-                    .HasColumnName("medical_information");
-
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.Hmo)
@@ -263,17 +227,43 @@ namespace DL
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.BacteriumId).HasColumnName("bacteriumId");
+                
 
-                entity.Property(e => e.LinkToImage)
-                    .HasColumnType("image")
-                    .HasColumnName("link_to_image");
+                //entity.Property(e => e.InStock)
+                //    .HasColumnType("image")
+                //    .HasColumnName("link_to_image");
 
-                entity.HasOne(d => d.Bacterium)
-                    .WithMany(p => p.PicturesCollections)
-                    .HasForeignKey(d => d.BacteriumId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__pictures___bacte__3F466844");
+                
+            });
+
+            modelBuilder.Entity<Rating>(entity =>
+            {
+                entity.ToTable("RATING");
+
+                entity.Property(e => e.RatingId).HasColumnName("RATING_ID");
+
+                entity.Property(e => e.Host)
+                    .HasMaxLength(50)
+                    .HasColumnName("HOST");
+
+                entity.Property(e => e.Method)
+                    .HasMaxLength(10)
+                    .HasColumnName("METHOD")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Path)
+                    .HasMaxLength(50)
+                    .HasColumnName("PATH");
+
+                entity.Property(e => e.RecordDate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("Record_Date");
+
+                entity.Property(e => e.Referer)
+                    .HasMaxLength(100)
+                    .HasColumnName("REFERER");
+
+                entity.Property(e => e.UserAgent).HasColumnName("USER_AGENT");
             });
 
             modelBuilder.Entity<User>(entity =>

@@ -22,9 +22,14 @@ namespace BL
         {
             return await examDL.GetByExamId(id);
         }
-        public async Task<List<Examination>> GetByPatientId(int PatientId)
+        public async Task<List<Examination>> GetByPatientIdNotChecked(int PatientId)
         {
-            return await examDL.GetByPatientId(PatientId);
+            return await examDL.GetByPatientIdNotChecked(PatientId);
+        }
+
+        public async Task<List<Examination>> GetByPatientIdChecked(int PatientId)
+        {
+            return await examDL.GetByPatientIdChecked(PatientId);
         }
         public async Task<List<Examination>> GetByDoctorId(int DoctorId)
         {

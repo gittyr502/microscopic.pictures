@@ -17,7 +17,7 @@ namespace BL
         }
         public async Task Post(Rating rating)
         {
-            await myDB.Rating.AddAsync(rating);
+            await myDB.Ratings.AddAsync(rating);
             await myDB.SaveChangesAsync();
             return;
             

@@ -17,7 +17,6 @@ namespace Entity
         public string BacteriumName { get; set; }
         public string InformationOfBacterium { get; set; }
         public string Medicine { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<PicturesCollection> PicturesCollections { get; set; }
     }

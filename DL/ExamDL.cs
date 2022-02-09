@@ -32,16 +32,24 @@ namespace DL
             }
             return default(Examination);
         }
-        public async Task<List<Examination>> GetByPatientId(int _PatientId)
+        public async Task<List<Examination>> GetByPatientIdNotChecked(int _PatientId)
         {
-           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(_PatientId)).ToListAsync<Examination>();
+           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(_PatientId)&& e.ComputerDiagnosis==null).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;
             }
             return null;
         }
-
+        public async Task<List<Examination>> GetByPatientIdChecked(int _PatientId)
+        {
+            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis == null).ToListAsync<Examination>();
+            if (examList != null)
+            {
+                return examList;
+            }
+            return null;
+        }
         public async Task<List<Examination>> GetByDoctorId(int _DoctorId)
         {
             List<Examination> examList = await myDB.Examinations.Where(e => e.DoctorId.Equals(_DoctorId)).ToListAsync<Examination>();

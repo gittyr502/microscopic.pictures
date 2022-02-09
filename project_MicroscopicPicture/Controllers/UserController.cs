@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Entity;
-     
+using Microsoft.AspNetCore.Authorization;
+using DTO;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace project_MicroscopicPicture.Controllers
@@ -21,10 +23,11 @@ namespace project_MicroscopicPicture.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}/{password}")]
-        public async Task<User> Get(string id,string password)
+        [HttpPost("login")]
+        [AllowAnonymous]
+        public async Task<User> Get(UserDTO loginUser)
         {
-           return await userBL.Get(id, password);
+           return await userBL.Get(loginUser.id, loginUser.password);
         }
 
         // POST api/<UserController>
