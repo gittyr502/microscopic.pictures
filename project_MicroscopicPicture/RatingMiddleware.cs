@@ -12,19 +12,19 @@ using System.Threading.Tasks;
 namespace project_MicroscopicPicture
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class Middleware
+    public class RatingMiddleware
     {
         IRatingBL ratingBL;
 
         private readonly RequestDelegate _next;
        
 
-        public Middleware(RequestDelegate next)
+        public RatingMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL, ILogger<Middleware> logger)
+        public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL, ILogger<RatingMiddleware> logger)
         { ratingBL = _ratingBL;
 
             Rating rating = new Rating {
@@ -48,7 +48,7 @@ namespace project_MicroscopicPicture
     {
         public static IApplicationBuilder UseMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<Middleware>();
+            return builder.UseMiddleware<RatingMiddleware>();
         }
     }
 }

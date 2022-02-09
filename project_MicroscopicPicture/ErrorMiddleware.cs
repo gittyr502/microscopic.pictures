@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 namespace project_MicroscopicPicture
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class Middleware1
+    public class ErrorMiddleware
     {
         private readonly RequestDelegate _next;
-        ILogger<Middleware1> _logger;
-        public Middleware1(RequestDelegate next)
+        ILogger<ErrorMiddleware> _logger;
+        public ErrorMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task Invoke(HttpContext httpContext, ILogger<Middleware1> logger)
+        public async Task Invoke(HttpContext httpContext, ILogger<ErrorMiddleware> logger)
         {
 
 
@@ -42,7 +42,7 @@ namespace project_MicroscopicPicture
     {
         public static IApplicationBuilder UseMiddleware1(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<Middleware1>();
+            return builder.UseMiddleware<ErrorMiddleware>();
         }
     }
 }
