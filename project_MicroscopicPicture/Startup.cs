@@ -1,8 +1,10 @@
 using BL;
 using DL;
+using Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +35,18 @@ namespace project_MicroscopicPicture
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => 
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                     .AllowAnyMethod();
+                     
+                     
+            }));
+
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
+
             services.AddScoped<IRatingDL, RatingDL>();
             services.AddScoped<IRatingBL, RatingBL>();
             services.AddScoped<IUserBL, UserBL>();
@@ -47,8 +61,8 @@ namespace project_MicroscopicPicture
             services.AddScoped<IPicturesBL, PicturesBL>();
             services.AddScoped<IPicturesDL, PicturesDL>();
 
-            services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"),ServiceLifetime.Scoped);
-            services.AddControllers();
+            services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+            services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true) ;
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("key").Value);
             services.AddAuthentication(x =>
             {
@@ -94,29 +108,49 @@ namespace project_MicroscopicPicture
                     }
                 });
             });
+            services.AddResponseCaching();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+           
+            app.UseErrorMiddleware();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "project_MicroscopicPicture v1"));
             }
-            app.UseMiddleware();
-            app.UseMiddleware1();
+
+           app.UseRatingMiddleware();
+            app.UseResponseCaching();
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromSeconds(60)
+                };
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+                    new string[] { "Accept-Encoding" };
+                await next();
+            });
+           app.UseCors("AllowAll");
+            
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseRouting();
-             app.Map("/api", (app1) =>
-            {
-                app1.UseRouting();
-                app1.UseAuthorization();
-                app1.UseEndpoints(endpoints => endpoints.MapControllers());
-            });
-             app.UseAuthorization();
+            app.Map("/api", (app1) =>
+           {
+               app1.UseRouting();
+               app1.UseAuthorization();
+               app1.UseEndpoints(endpoints => endpoints.MapControllers());
+           });
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

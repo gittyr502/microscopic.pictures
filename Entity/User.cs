@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-
 #nullable disable
 
 namespace Entity
@@ -24,17 +22,14 @@ namespace Entity
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
+        public string Token { get; set; }
         public string Salt { get; set; }
-        [JsonIgnore]
-        public virtual UserKind UserKind { get; set; }
+        
         [JsonIgnore]
         public virtual ICollection<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
         [JsonIgnore]
         public virtual ICollection<Examination> Examinations { get; set; }
         [JsonIgnore]
         public virtual ICollection<Patient> Patients { get; set; }
-
-        [NotMapped]
-        public string Token { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=SRV2\\PUPILS;Database=MicroscopicPicture1;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=srv2\\PUPILS;Database=MicroscopicPicture1;Trusted_Connection=True;");
             }
         }
 
@@ -227,13 +227,11 @@ namespace DL
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                
+                entity.Property(e => e.InStock).HasColumnName("in_stock");
 
-                //entity.Property(e => e.InStock)
-                //    .HasColumnType("image")
-                //    .HasColumnName("link_to_image");
-
-                
+                entity.Property(e => e.LinkToImage)
+                    .HasColumnType("image")
+                    .HasColumnName("link_to_image");
             });
 
             modelBuilder.Entity<Rating>(entity =>
@@ -306,12 +304,6 @@ namespace DL
                     .IsFixedLength(true);
 
                 entity.Property(e => e.UserKindId).HasColumnName("user_kind_id");
-
-                entity.HasOne(d => d.UserKind)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.UserKindId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__users__user_kind__403A8C7D");
             });
 
             modelBuilder.Entity<UserKind>(entity =>
