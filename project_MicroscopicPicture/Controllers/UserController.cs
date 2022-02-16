@@ -25,9 +25,12 @@ namespace project_MicroscopicPicture.Controllers
         // GET api/<UserController>/5
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<User> Get(UserDTO loginUser)
+        public async Task<ActionResult<User>> Get(UserDTO loginUser)
         {
-           return await userBL.Get(loginUser.id, loginUser.password);
+           User u= await userBL.Get(loginUser.id, loginUser.password);
+            if (u == null)
+                return NoContent();
+            else return Ok(u);
         }
 
         // POST api/<UserController>

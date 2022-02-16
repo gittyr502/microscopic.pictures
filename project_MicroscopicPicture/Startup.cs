@@ -43,7 +43,7 @@ namespace project_MicroscopicPicture
             services.AddScoped<IPicturesDL, PicturesDL>();
             services.AddScoped<IPatientBL, PatientBL>();
             services.AddScoped<IPatientDL, PatientDL>();
-         
+            services.AddScoped<IPasswordHashHelper, PasswordHashHelper>();
             services.AddScoped<IPicturesBL, PicturesBL>();
             services.AddScoped<IPicturesDL, PicturesDL>();
 
