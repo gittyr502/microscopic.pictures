@@ -34,7 +34,7 @@ namespace DL
         }
         public async Task<List<Examination>> GetByPatientIdNotChecked(int _PatientId)
         {
-           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(_PatientId)&& e.ComputerDiagnosis==null).ToListAsync<Examination>();
+           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(_PatientId)&& e.ComputerDiagnosis==false).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;
@@ -43,7 +43,7 @@ namespace DL
         }
         public async Task<List<Examination>> GetByPatientIdChecked(int _PatientId)
         {
-            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis == null).ToListAsync<Examination>();
+            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis ==true).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;

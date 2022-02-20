@@ -32,6 +32,7 @@ namespace DL
             if (p!=null)
             {
                 myDB.Patients.Remove(p);
+                await myDB.SaveChangesAsync();
             }
             
         }

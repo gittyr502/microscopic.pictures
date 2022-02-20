@@ -8,7 +8,8 @@ namespace Entity
     public partial class PicturesCollection
     {
         public int Id { get; set; }
-        public byte[] LinkToImage { get; set; }
-        public bool? InStock { get; set; }
+       public bool? InStock { get; set; } 
+        public string LinkToImage { get; set; }
+        
     }
 }

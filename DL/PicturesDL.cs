@@ -20,6 +20,7 @@ namespace DL
         {
             await myDB.PicturesCollections.AddAsync(picture);
             await myDB.SaveChangesAsync();
+           
             //שליחה לאלגוריתם
             //await myDB.Users.Where(u=> u.;
             //MailMessage message = new MailMessage();
@@ -51,6 +52,7 @@ namespace DL
             //    {
             //        throw ex;
             //    }
+            
             
         }
     }

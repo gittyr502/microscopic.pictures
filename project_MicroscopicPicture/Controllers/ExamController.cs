@@ -53,7 +53,7 @@ namespace project_MicroscopicPicture.Controllers
         }
         // POST api/<ExamController>
         [HttpPost]
-        public async void Post([FromBody] Examination _exam)
+        public async Task Post([FromBody] Examination _exam)
         {
             await examBL.Post(_exam);
 

@@ -14,17 +14,18 @@ namespace BL
 {
     public class UserBL:IUserBL
     {
-        IUserDL userDL;
+        IUserDL _userDL;
         IConfiguration _configuration;
         IPasswordHashHelper _passwordHashHelper;
-        public UserBL(IUserDL _userDL,IPasswordHashHelper passwordHashHelper)
+        public UserBL(IUserDL userDL,IPasswordHashHelper passwordHashHelper, IConfiguration configuration)
         {
-            userDL=_userDL;
+           _userDL= userDL;
             _passwordHashHelper = passwordHashHelper;
+            _configuration = configuration;
         }
         public async Task<User> Get(string id, string password)
         {
-           User user= await userDL.Get(id, password);
+           User user= await _userDL.Get(id, password);
             if (user == null) 
                 return null;
            
@@ -55,7 +56,7 @@ namespace BL
         {
             user.Salt = _passwordHashHelper.GenerateSalt(8);
             user.Password = _passwordHashHelper.HashPassword (user.Password, user.Salt, 1000, 8);
-            return await userDL.Post(user); 
+            return await _userDL.Post(user); 
         }
 
        

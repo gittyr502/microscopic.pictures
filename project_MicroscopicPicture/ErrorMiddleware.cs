@@ -38,7 +38,7 @@ namespace project_MicroscopicPicture
     }
 
     // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class Middleware1Extensions
+    public static class ErrorMiddlewareExtensions
     {
         public static IApplicationBuilder UseErrorMiddleware(this IApplicationBuilder builder)
         {

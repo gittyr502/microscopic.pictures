@@ -230,7 +230,7 @@ namespace DL
                 entity.Property(e => e.InStock).HasColumnName("in_stock");
 
                 entity.Property(e => e.LinkToImage)
-                    .HasColumnType("image")
+                    .HasColumnType("nvarchar")
                     .HasColumnName("link_to_image");
             });
 
