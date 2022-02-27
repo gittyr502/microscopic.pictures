@@ -1,23 +1,21 @@
-﻿using System;
+﻿using Entity;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
-#nullable disable
+using System.Threading.Tasks;
 
-namespace Entity
+namespace DTO
 {
-    public partial class Patient
+   public class PatientDTO
     {
-        public Patient()
-        {
-            Examinations = new HashSet<Examination>();
-        }
-
-        public int Id { get; set; }
+        public int PatientId { get; set; }
+        public string IdNumber { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int UserId { get; set; }
         public DateTime BirthDate { get; set; }
-        public int HmoId { get; set; }
-        [JsonIgnore]
-        public virtual Hmo Hmo { get; set; }
        // [JsonIgnore]
         public virtual User User { get; set; }
         [JsonIgnore]

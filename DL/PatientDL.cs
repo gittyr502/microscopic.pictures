@@ -1,4 +1,6 @@
-﻿using Entity;
+﻿using AutoMapper;
+using DTO;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace DL
     public class PatientDL:IPatientDL
     {
         MicroscopicPicture1Context myDB;
-        public PatientDL(MicroscopicPicture1Context _myDB)
+        IMapper mapper;
+        public PatientDL(MicroscopicPicture1Context _myDB,IMapper _mapper)
         {
             myDB = _myDB;
+            mapper = _mapper;
         }
         public async Task Post(Patient patient)
         {
@@ -36,5 +40,18 @@ namespace DL
             }
             
         }
-}
+
+        public async Task<List<PatientDTO>> GetPatients(int userId)
+        {
+           
+            List<PatientDTO> patientList =await myDB.Users.Where(u => u.Id == userId).Join(myDB.Patients, u => u.Id, p => p.UserId,
+                  (u, p) => mapper.Map<Patient, PatientDTO>(p)).ToListAsync<PatientDTO>();
+            if (patientList != null)
+            {
+                return patientList;
+            }
+            return null;
+            
+        }
+    }
 }

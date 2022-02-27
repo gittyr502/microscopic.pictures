@@ -46,7 +46,6 @@ namespace project_MicroscopicPicture
             }));
 
             //services.AddMvc(options => options.EnableEndpointRouting = false);
-
             services.AddScoped<IRatingDL, RatingDL>();
             services.AddScoped<IRatingBL, RatingBL>();
             services.AddScoped<IUserBL, UserBL>();
@@ -60,6 +59,8 @@ namespace project_MicroscopicPicture
             services.AddScoped<IPasswordHashHelper, PasswordHashHelper>();
             services.AddScoped<IPicturesBL, PicturesBL>();
             services.AddScoped<IPicturesDL, PicturesDL>();
+            services.AddAutoMapper(typeof(Startup));
+
 
             services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true) ;

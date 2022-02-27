@@ -1,4 +1,5 @@
-﻿using Entity;
+﻿using DTO;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace DL
         Task Post(Patient patient);
         Task Put(Patient patient);
         Task Delete(int id);
+        Task<List<PatientDTO>> GetPatients(int userId);
     }
 }

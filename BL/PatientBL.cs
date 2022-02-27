@@ -1,4 +1,5 @@
 ﻿using DL;
+using DTO;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,10 @@ namespace BL
         public async Task Delete(int id)
         {
            await patientDL.Delete(id);
+        }
+       public async Task<List<PatientDTO>> GetPatients(int userId)
+        {
+            return await patientDL.GetPatients(userId);
         }
     }
 }
