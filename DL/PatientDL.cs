@@ -43,9 +43,9 @@ namespace DL
 
         public async Task<List<PatientDTO>> GetPatients(int userId)
         {
-           
-            List<PatientDTO> patientList =await myDB.Users.Where(u => u.Id == userId).Join(myDB.Patients, u => u.Id, p => p.UserId,
-                  (u, p) => mapper.Map<Patient, PatientDTO>(p)).ToListAsync<PatientDTO>();
+
+            List<PatientDTO> patientList = await myDB.Users.Where(u => u.Id == userId).Include(u => u.Patients).AllAsync();
+                 
             if (patientList != null)
             {
                 return patientList;

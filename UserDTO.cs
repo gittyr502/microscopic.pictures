@@ -1,4 +1,4 @@
-namespace DTO
+amespace DTO
 {
     public class UserDTO
     {
