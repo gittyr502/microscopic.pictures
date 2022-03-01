@@ -13,11 +13,11 @@ namespace DL
     public class PatientDL:IPatientDL
     {
         MicroscopicPicture1Context myDB;
-        IMapper mapper;
-        public PatientDL(MicroscopicPicture1Context _myDB,IMapper _mapper)
+      
+        public PatientDL(MicroscopicPicture1Context _myDB)
         {
             myDB = _myDB;
-            mapper = _mapper;
+            
         }
         public async Task Post(Patient patient)
         {
@@ -41,11 +41,13 @@ namespace DL
             
         }
 
-        public async Task<List<PatientDTO>> GetPatients(int userId)
+        public async Task<List<Patient>> GetPatients(int userId)
         {
 
-            List<PatientDTO> patientList = await myDB.Users.Where(u => u.Id == userId).Include(u => u.Patients).AllAsync();
-                 
+            List<Patient> patientList = await myDB.Patients.Where(p => p.UserId == userId)
+                .Include(u => u.User).ToListAsync();
+
+           
             if (patientList != null)
             {
                 return patientList;

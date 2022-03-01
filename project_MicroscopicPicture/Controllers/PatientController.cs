@@ -35,10 +35,10 @@ namespace project_MicroscopicPicture.Controllers
         [HttpGet("{userId}")]
         public async Task<List<PatientDTO>>GetPatients(int userId)
             {
-             return await patientBL.GetPatients(userId);
-            //return _mapper.Map<List<Patient>,List<PatientDTO>>(p);
-             
-            }
+             List<Patient> listPatient= await patientBL.GetPatients(userId);
+            return _mapper.Map<List<Patient>, List<PatientDTO>>(listPatient);
+
+        }
 
         // PUT api/<PatientController>/5
         [HttpPut("{id}")]

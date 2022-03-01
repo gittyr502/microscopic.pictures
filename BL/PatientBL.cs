@@ -30,7 +30,7 @@ namespace BL
         {
            await patientDL.Delete(id);
         }
-       public async Task<List<PatientDTO>> GetPatients(int userId)
+       public async Task<List<Patient>> GetPatients(int userId)
         {
             return await patientDL.GetPatients(userId);
         }

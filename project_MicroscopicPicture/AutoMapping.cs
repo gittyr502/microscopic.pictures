@@ -20,7 +20,10 @@ namespace project_MicroscopicPicture
                          src => 
                      src.User.FirstName))
                      .ForMember(dest => dest.LastName,
-                     opts => opts.MapFrom(src => src.User.LastName)).ReverseMap();
+                     opts => opts.MapFrom(src => src.User.LastName))
+                     .ForMember(dest => dest.IdNumber,
+                     opts => opts.MapFrom(src => src.User.IdNumber))
+                     .ReverseMap();
         }
 
     }

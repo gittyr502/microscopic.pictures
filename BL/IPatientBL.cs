@@ -13,6 +13,6 @@ namespace BL
         Task Post(Patient patient);
         Task Put(Patient patient);
         Task Delete(int id);
-        Task<List<PatientDTO>> GetPatients(int userId);
+        Task<List<Patient>> GetPatients(int userId);
     }
 }

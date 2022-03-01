@@ -16,7 +16,7 @@ namespace DTO
         public string LastName { get; set; }
         public int UserId { get; set; }
         public DateTime BirthDate { get; set; }
-       // [JsonIgnore]
+       [JsonIgnore]
         public virtual User User { get; set; }
         [JsonIgnore]
         public virtual ICollection<Examination> Examinations { get; set; }
