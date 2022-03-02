@@ -59,9 +59,10 @@ namespace BL
             return await _userDL.Post(user); 
         }
 
-       
-
-        
+        public async Task updatePassword(string newPassword, int userId)
+        {
+            await _userDL.updatePassword(newPassword, userId);
+        }
     }
 
    

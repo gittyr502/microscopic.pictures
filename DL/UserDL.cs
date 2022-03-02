@@ -34,6 +34,10 @@ namespace DL
             return user.Id;
         }
 
+        public async Task updatePassword(string newPassword, int userId)
+        {
+          //  await myDB.Users.Where(u => u.Id.Equals(userId));
 
+        }
     }
 }   

@@ -40,6 +40,11 @@ namespace project_MicroscopicPicture.Controllers
             return await userBL.Post(user);
 
         }
+        [HttpPut]
+        public async Task updatePassword([FromBody]string newPassword, int userId)
+        {
+            await userBL.updatePassword(newPassword,userId);
+        }
 
 
         

@@ -15,5 +15,6 @@ namespace DL
         Task<List<Examination>> GetByPatientIdChecked(int PatientId);
         Task<List<Examination>> GetByDoctorId(int _DoctorId);
         Task<List<Examination>> GetByDate(DateTime date);
+        Task<List<Examination>> GetAllExams();
     }
 }

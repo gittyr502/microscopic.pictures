@@ -40,5 +40,10 @@ namespace BL
         {
             return await examDL.GetByDate(date);
         }
+
+        public async Task<List<Examination>> GetAllExams()
+        {
+            return await examDL.GetAllExams();
+        }
     }
 }

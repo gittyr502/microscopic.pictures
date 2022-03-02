@@ -39,6 +39,12 @@ namespace project_MicroscopicPicture.Controllers
             return await examBL.GetByPatientIdChecked(PatientId);
         }
 
+        [HttpGet("GetAllExam")]
+        public async Task<List<Examination>>GetAllExams()
+        {
+            return await examBL.GetAllExams();
+        }
+
         [HttpGet("getByDoctorId/{DoctorId}")]
         public async Task<List<Examination>> GetByDoctorId(int DoctorId)
         {
