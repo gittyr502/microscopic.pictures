@@ -30,6 +30,20 @@ namespace Entity
         [JsonIgnore]
         public virtual ICollection<Examination> Examinations { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Patient> Patients { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; } 
+        
+        User(string id,string idNumber,string firstName,string lastName,string phone,string patients,string email, string newPassword)
+    {
+        this.id=id;
+        this.IdNumber=idNumber;
+         this.FirstName=firstName;
+           this.LastName=lastName;
+            this.Phone=phone;
+            this.Patients;
+            this.Email=email;
+            this.Password=Password;
     }
+    }
+   
 }
+

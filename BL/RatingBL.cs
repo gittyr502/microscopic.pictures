@@ -13,7 +13,7 @@ namespace BL
         IRatingDL ratingDl;
 
         public RatingBL(IRatingDL _ratingDL)
-        {
+        {  
             ratingDl = _ratingDL;
         }
 

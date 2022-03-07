@@ -59,10 +59,76 @@ namespace BL
             return await _userDL.Post(user); 
         }
 
-        public async Task updatePassword(string newPassword, int userId)
+        public async Task updatePassword(string email)
         {
-            await _userDL.updatePassword(newPassword, userId);
+            User u= await _userDL.GetByEmail(email)
+            if (u != null)
+          {  sendMail(email);
+                
+                User newUser=new User(u.Id,u.IdNumber,u.FirstName,u.LastName,u.Phone,u.Patients,u.Email,newPassword);
+            newUser.Salt = _passwordHashHelper.GenerateSalt(8);
+           newUser.Password = _passwordHashHelper.HashPassword (newUser.Password,newUser.Salt, 1000, 8);
+            await _userDL.updatePassword(u.Id,newUser);
+                }
+
         }
+
+        
+
+        public string randStr()
+        {
+            int length = 7;
+            // creating a StringBuilder object()
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+
+            char letter;
+
+            for (int i = 0; i < length; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+            return str_build.ToString();
+        }
+
+         public async Task<string> sendMail(string email)
+        {
+           
+                //string to = "212382261@mby.co.il"; //To address    
+                //string from = "324102417@mby.co.il"; //From address    
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress("212583055@mby.co.il");
+                message.To.Add(new MailAddress(email));
+                string randstring = randStr();
+                string mailbody = "your identifier is: \n" + randstring;
+                //  string link = "<a href= https://localhost:44317/swagger/index.html > enter to match  </a>";
+                message.Subject = "Sending Email Using Asp.Net & C#";
+                message.Body = mailbody; //+ mapurl;
+                message.BodyEncoding = Encoding.UTF8;
+                message.IsBodyHtml = true;
+                SmtpClient client = new SmtpClient("smtp.office365.com", 587); //Gmail smtp    
+                System.Net.NetworkCredential basicCredential1 = new
+                System.Net.NetworkCredential("212853055@mby.co.il", "Student@264");
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = basicCredential1;
+                try
+                {
+                    client.Send(message);
+                }
+
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                return randstring;
+            
+
+        }
+
     }
 
    

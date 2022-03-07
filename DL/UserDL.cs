@@ -26,6 +26,16 @@ namespace DL
             }
             return null;
         }
+         public async Task<User> GetByMail(string email)
+        {
+           
+            User u = await myDB.Users.Where(u =>  u.Email.Equals(email)).FirstOrDefaultAsync();
+            if (u != null)
+            {
+                return u;
+            }
+            return null;
+        }
 
         public async Task<int> Post(User user)
         {
@@ -34,10 +44,12 @@ namespace DL
             return user.Id;
         }
 
-        public async Task updatePassword(string newPassword, int userId)
+        public async Task updatePassword(int userId, User newUser )
         {
-          //  await myDB.Users.Where(u => u.Id.Equals(userId));
-
+        User u=  await myDB.Users.FindAsync(userId);
+         myDB.Entry(u).CurrentValues.SetValues(newUser);
+           await myDB..SaveChangesAsync();
         }
+
     }
 }   
