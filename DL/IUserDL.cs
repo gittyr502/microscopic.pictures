@@ -11,6 +11,10 @@ namespace DL
     {
         Task<int> Post(User user);
         Task<User> Get(string id, string password);
-        Task updatePassword(string newPassword, int userId);
+        //Task sendCodePassword(string newPassword, int userId);
+
+        Task<User> GetByEmail(string email);
+        Task updatePassword(User u);
+        Task<User> getByIdNumber(int id);
     }
 }

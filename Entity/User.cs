@@ -7,12 +7,23 @@ namespace Entity
 {
     public partial class User
     {
-        public User()
-        {
-            DoctorsInDiscussionGroups = new HashSet<DoctorsInDiscussionGroup>();
-            Examinations = new HashSet<Examination>();
-            Patients = new HashSet<Patient>();
-        }
+        //public User(object id)
+        //{
+        //    DoctorsInDiscussionGroups = new HashSet<DoctorsInDiscussionGroup>();
+        //    Examinations = new HashSet<Examination>();
+        //    Patients = new HashSet<Patient>();
+        //}  
+    //    public User(User u)
+    //{
+    //    u.Id=id;
+    //    u.IdNumber=idNumber;
+    //     u.FirstName=firstName;
+    //       u.LastName=lastName;
+    //        u.Phone=phone;
+    //        u.Patients=Patients;
+    //        u.Email=email;
+    //        u.Password=Password;
+    //}
 
         public int Id { get; set; }
         public string IdNumber { get; set; }
@@ -32,17 +43,7 @@ namespace Entity
         [JsonIgnore]
         public virtual ICollection<Patient> Patients { get; set; } 
         
-        User(string id,string idNumber,string firstName,string lastName,string phone,string patients,string email, string newPassword)
-    {
-        this.id=id;
-        this.IdNumber=idNumber;
-         this.FirstName=firstName;
-           this.LastName=lastName;
-            this.Phone=phone;
-            this.Patients;
-            this.Email=email;
-            this.Password=Password;
-    }
+     
     }
    
 }

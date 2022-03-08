@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace BL
         IUserDL _userDL;
         IConfiguration _configuration;
         IPasswordHashHelper _passwordHashHelper;
+        string codeOfPassword;
         public UserBL(IUserDL userDL,IPasswordHashHelper passwordHashHelper, IConfiguration configuration)
         {
            _userDL= userDL;
@@ -59,17 +61,17 @@ namespace BL
             return await _userDL.Post(user); 
         }
 
-        public async Task updatePassword(string email)
+        public async Task sendCodePassword(string email)
         {
-            User u= await _userDL.GetByEmail(email)
+            User u = await _userDL.GetByEmail(email);
             if (u != null)
-          {  sendMail(email);
-                
-                User newUser=new User(u.Id,u.IdNumber,u.FirstName,u.LastName,u.Phone,u.Patients,u.Email,newPassword);
-            newUser.Salt = _passwordHashHelper.GenerateSalt(8);
-           newUser.Password = _passwordHashHelper.HashPassword (newUser.Password,newUser.Salt, 1000, 8);
-            await _userDL.updatePassword(u.Id,newUser);
+          {     string code =sendMail(email);
+                if (code != null)
+                {
+                    codeOfPassword = code.ToString();
                 }
+              
+            }
 
         }
 
@@ -94,13 +96,13 @@ namespace BL
             return str_build.ToString();
         }
 
-         public async Task<string> sendMail(string email)
+         public  string sendMail(string email)
         {
            
                 //string to = "212382261@mby.co.il"; //To address    
                 //string from = "324102417@mby.co.il"; //From address    
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress("212583055@mby.co.il");
+                message.From = new MailAddress("212853055@mby.co.il");
                 message.To.Add(new MailAddress(email));
                 string randstring = randStr();
                 string mailbody = "your identifier is: \n" + randstring;
@@ -129,6 +131,17 @@ namespace BL
 
         }
 
+     
+        public  async Task updatePassword(string code, string newPassword, int id)
+        {//if (code==codeOfPassword)
+                if (code!=null)
+                { 
+            User u = await _userDL.getByIdNumber(id);
+                u.Password= _passwordHashHelper.HashPassword(newPassword, u.Salt, 1000, 8);
+             
+            await _userDL.updatePassword(u);
+            }
+        }
     }
 
    

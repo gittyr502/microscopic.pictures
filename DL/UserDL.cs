@@ -26,10 +26,20 @@ namespace DL
             }
             return null;
         }
-         public async Task<User> GetByMail(string email)
+         public async Task<User> GetByEmail(string email)
         {
            
             User u = await myDB.Users.Where(u =>  u.Email.Equals(email)).FirstOrDefaultAsync();
+            if (u != null)
+            {
+                return u;
+            }
+            return null;
+        }
+
+        public async Task<User> getByIdNumber(int id)
+        {
+            User u = await myDB.Users.Where(u => u.Id.Equals(id)).FirstOrDefaultAsync();
             if (u != null)
             {
                 return u;
@@ -44,12 +54,21 @@ namespace DL
             return user.Id;
         }
 
-        public async Task updatePassword(int userId, User newUser )
+        public async Task updatePassword(User u)
         {
-        User u=  await myDB.Users.FindAsync(userId);
-         myDB.Entry(u).CurrentValues.SetValues(newUser);
-           await myDB..SaveChangesAsync();
+            User u1 = await myDB.Users.Where(u1 => u1.IdNumber.Equals(u.IdNumber)).FirstOrDefaultAsync();
+            myDB.Entry(u1).CurrentValues.SetValues(u);
+            await myDB.SaveChangesAsync();
         }
+
+       
+        //public async Task sendCodePassword(string email)
+        //{
+        //User u=  await myDB.Users.FindAsync(userId);
+        // myDB.Entry(u).CurrentValues.SetValues(newUser);
+        //   await myDB.SaveChangesAsync();
+        //}
+
 
     }
 }   
