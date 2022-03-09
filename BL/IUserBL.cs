@@ -10,7 +10,7 @@ namespace BL
     {
         Task<User> Get(string id, string password);
         Task<int> Post(User user);
-        Task sendCodePassword(string email);
+        Task<int> sendCodePassword(string email);
         Task updatePassword(string code, string newPassword, int id);
     }
 }

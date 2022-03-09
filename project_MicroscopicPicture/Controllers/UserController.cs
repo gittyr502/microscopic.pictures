@@ -40,11 +40,14 @@ namespace project_MicroscopicPicture.Controllers
             return await userBL.Post(user);
 
         }
-        [HttpPut("sendCodeToUpdatePassword")]
-        public async Task sendCodePassword([FromBody] string email)
+        
+        
+        [HttpGet("sendCodeToUpdatePassword/{email}")]
+        public async Task<int> sendCodePassword(string email)
         {
-            await userBL.sendCodePassword(email);
+           return await userBL.sendCodePassword(email);
         }
+
         [HttpPut("updatePassword/{code}/{password}/{id}")]
         public async Task updatePassword(string code, string password, int id)
         {

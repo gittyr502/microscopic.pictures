@@ -61,12 +61,12 @@ namespace DL
             await myDB.SaveChangesAsync();
         }
 
-       
+
         //public async Task sendCodePassword(string email)
         //{
-        //User u=  await myDB.Users.FindAsync(userId);
-        // myDB.Entry(u).CurrentValues.SetValues(newUser);
-        //   await myDB.SaveChangesAsync();
+        //    User u = await myDB.Users.FindAsync(userId);
+        //    myDB.Entry(u).CurrentValues.SetValues(newUser);
+        //    await myDB.SaveChangesAsync();
         //}
 
 

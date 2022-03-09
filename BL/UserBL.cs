@@ -61,17 +61,19 @@ namespace BL
             return await _userDL.Post(user); 
         }
 
-        public async Task sendCodePassword(string email)
+        public async Task<int> sendCodePassword(string email)
         {
             User u = await _userDL.GetByEmail(email);
             if (u != null)
-          {     string code =sendMail(email);
+                {     string code =sendMail(email);
                 if (code != null)
                 {
                     codeOfPassword = code.ToString();
+                    return u.Id;
                 }
               
             }
+            return 0;
 
         }
 
@@ -137,9 +139,13 @@ namespace BL
                 if (code!=null)
                 { 
             User u = await _userDL.getByIdNumber(id);
-                u.Password= _passwordHashHelper.HashPassword(newPassword, u.Salt, 1000, 8);
-             
-            await _userDL.updatePassword(u);
+                if (u != null)
+                {
+                    u.Password = _passwordHashHelper.HashPassword(newPassword, u.Salt, 1000, 8);
+
+                    await _userDL.updatePassword(u);
+                }
+
             }
         }
     }
