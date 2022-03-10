@@ -26,11 +26,15 @@ namespace project_MicroscopicPicture
 
         public async Task Invoke(HttpContext httpContext, IRatingBL _ratingBL, ILogger<RatingMiddleware> logger)
         { ratingBL = _ratingBL;
-
+            int index = httpContext.Request.Path.Value.IndexOf('@');
+            string path;
+            if (index >= 0)
+                path = httpContext.Request.Path.Value.Substring(0, index);
+            else path = httpContext.Request.Path.Value;
             Rating rating = new Rating {
                 Host = httpContext.Request.Host.Host,
                 Method = httpContext.Request.Method,
-                Path = httpContext.Request.Path.Value,
+                Path = path,
                 UserAgent = httpContext.Request.Headers["User-Agent"].ToString(),
                 Referer = httpContext.Request.Headers["Referrer"],
                 RecordDate = DateTime.Now

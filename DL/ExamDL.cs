@@ -69,5 +69,15 @@ namespace DL
             }
             return null;
         }
+
+        public async Task<List<Examination>>GetAllExams()
+        {
+            List<Examination> examList = await myDB.Examinations.ToListAsync();
+            if (examList != null)
+            {
+                return examList;
+            }
+            return null;
+        }
     }
 }
