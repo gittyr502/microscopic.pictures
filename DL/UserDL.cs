@@ -37,6 +37,12 @@ namespace DL
             return null;
         }
 
+        public async Task<List<User>> GetAllUsers()
+        {
+            List<User> l = await myDB.Users.ToListAsync();
+            return l;
+        }
+
         public async Task<User> getByIdNumber(int id)
         {
             User u = await myDB.Users.Where(u => u.Id.Equals(id)).FirstOrDefaultAsync();

@@ -9,6 +9,8 @@ namespace BL
     public interface IUserBL
     {
         Task<User> Get(string id, string password);
+
+        Task<List<User>> GetAllUsers();
         Task<int> Post(User user);
         Task<int> sendCodePassword(string email);
         Task updatePassword(string code, string newPassword, int id);

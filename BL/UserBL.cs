@@ -54,6 +54,11 @@ namespace BL
             return user;
         }
 
+        public async Task<List<User>> GetAllUsers()
+        {
+            return await _userDL.GetAllUsers();
+        }
+
         public async Task<int> Post(User user)
         {
             user.Salt = _passwordHashHelper.GenerateSalt(8);

@@ -13,6 +13,7 @@ namespace DL
         Task<User> Get(string id, string password);
         //Task sendCodePassword(string newPassword, int userId);
 
+        Task<List<User>> GetAllUsers();
         Task<User> GetByEmail(string email);
         Task updatePassword(User u);
         Task<User> getByIdNumber(int id);

@@ -16,10 +16,10 @@ namespace project_MicroscopicPicture.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    {    IUserBL userBL;
-       public UserController(IUserBL _userBL)
+    { IUserBL userBL;
+        public UserController(IUserBL _userBL)
         {
-            userBL =_userBL;
+            userBL = _userBL;
         }
 
         // GET api/<UserController>/5
@@ -27,11 +27,18 @@ namespace project_MicroscopicPicture.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<User>> Get([FromBody] UserDTO loginUser)
         {
-           User u= await userBL.Get(loginUser.id, loginUser.password);
+            User u = await userBL.Get(loginUser.id, loginUser.password);
             if (u == null)
                 return NoContent();
             else return Ok(u);
         }
+
+        [HttpGet]
+        public async Task<List<User>>GetAllUsers()
+        {
+            return await userBL.GetAllUsers();
+        }
+
 
         // POST api/<UserController>
         [HttpPost]
