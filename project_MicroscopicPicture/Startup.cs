@@ -62,7 +62,7 @@ namespace project_MicroscopicPicture
             services.AddAutoMapper(typeof(Startup));
 
 
-            services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=DESKTOP-45L6QC9;Database=MicroscopicPicture1;Trusted_Connection=True;"), ServiceLifetime.Scoped);
+            services.AddDbContext<MicroscopicPicture1Context>(options => options.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;"), ServiceLifetime.Scoped);
             services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNameCaseInsensitive = true) ;
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("key").Value);
             services.AddAuthentication(x =>
