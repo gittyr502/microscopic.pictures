@@ -1,7 +1,12 @@
 ﻿using System;
+
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+
+using Microsoft.Extensions.Configuration;
+
+
 
 #nullable disable
 
@@ -9,15 +14,19 @@ namespace DL
 {
     public partial class MicroscopicPicture1Context : DbContext
     {
-        public MicroscopicPicture1Context()
+        IConfiguration _configuration;
+        public MicroscopicPicture1Context(IConfiguration configuration)
         {
+            _configuration = configuration;
         }
 
-        public MicroscopicPicture1Context(DbContextOptions<MicroscopicPicture1Context> options)
+        public MicroscopicPicture1Context(DbContextOptions<MicroscopicPicture1Context> options,IConfiguration configuration)
             : base(options)
-        {
+        { 
+            
+            _configuration = configuration;
         }
-
+       
         public virtual DbSet<Bacterium> Bacteriums { get; set; }
         public virtual DbSet<DiscussionGroup> DiscussionGroups { get; set; }
         public virtual DbSet<DoctorsInDiscussionGroup> DoctorsInDiscussionGroups { get; set; }
@@ -34,7 +43,7 @@ namespace DL
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=MicroscopicPicture1;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(  _configuration.GetSection("connectionString").Value);
             }
         }
 

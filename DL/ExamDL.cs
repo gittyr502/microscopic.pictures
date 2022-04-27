@@ -79,5 +79,10 @@ namespace DL
             }
             return null;
         }
+
+        public async Task<bool> ImgExist( string linkToFile)
+        {
+            return await myDB.Examinations.AnyAsync(x => x.LinkToFile.Equals(linkToFile));
+        }
     }
 }

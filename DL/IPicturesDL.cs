@@ -10,5 +10,6 @@ namespace DL
     public interface IPicturesDL
     {
         Task Post(PicturesCollection picture);
+        Task<bool> ImgExist(string linkToFile);
     }
 }
