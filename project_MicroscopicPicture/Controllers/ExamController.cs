@@ -15,8 +15,8 @@ namespace project_MicroscopicPicture.Controllers
     public class ExamController : ControllerBase
     {
         IExamBL examBL;
-        
-       public ExamController(IExamBL _examBL)
+
+        public ExamController(IExamBL _examBL)
         {
             examBL = _examBL;
         }
@@ -40,7 +40,7 @@ namespace project_MicroscopicPicture.Controllers
         }
 
         [HttpGet("GetAllExam")]
-        public async Task<List<Examination>>GetAllExams()
+        public async Task<List<Examination>> GetAllExams()
         {
             return await examBL.GetAllExams();
         }
@@ -53,7 +53,7 @@ namespace project_MicroscopicPicture.Controllers
 
         [HttpGet("getByDate/{Date}")]
 
-        public async Task<List<Examination>>GetByDate(DateTime date)
+        public async Task<List<Examination>> GetByDate(DateTime date)
         {
             return await examBL.GetByDate(date);
         }
@@ -63,6 +63,12 @@ namespace project_MicroscopicPicture.Controllers
         {
             await examBL.Post(_exam);
 
+        }
+
+        [HttpGet("getDoctorNameById/{id}")]
+        public async Task<string> getDoctorNameById(int id)
+        {
+            return await examBL.getDoctorNameById(id);
         }
 
     }

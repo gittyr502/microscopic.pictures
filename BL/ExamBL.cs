@@ -40,6 +40,10 @@ namespace BL
         {
             return await examDL.GetByDate(date);
         }
+        public async Task<string> getDoctorNameById(int id)
+        {
+            return await examDL.getDoctorNameById(id);
+        }
 
         public async Task<List<Examination>> GetAllExams()
         {

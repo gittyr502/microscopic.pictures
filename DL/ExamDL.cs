@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DL
 {
-    public class ExamDL: IExamDL
+    public class ExamDL : IExamDL
     {
         MicroscopicPicture1Context myDB;
         public ExamDL(MicroscopicPicture1Context _myDB)
         {
             myDB = _myDB;
-                
+
         }
 
         public async Task Post(Examination exam)
@@ -25,7 +26,7 @@ namespace DL
         }
         public async Task<Examination> GetByExamId(int id)
         {
-           Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
+            Examination e = await myDB.Examinations.Where(e => e.Id.Equals(id)).FirstOrDefaultAsync();
             if (e != null)
             {
                 return e;
@@ -34,7 +35,7 @@ namespace DL
         }
         public async Task<List<Examination>> GetByPatientIdNotChecked(int _PatientId)
         {
-           List<Examination> examList = await myDB.Examinations.Where(e =>e.PatientId.Equals(_PatientId)&& e.ComputerDiagnosis==false).ToListAsync<Examination>();
+            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis == false).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;
@@ -43,7 +44,7 @@ namespace DL
         }
         public async Task<List<Examination>> GetByPatientIdChecked(int _PatientId)
         {
-            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis ==true).ToListAsync<Examination>();
+            List<Examination> examList = await myDB.Examinations.Where(e => e.PatientId.Equals(_PatientId) && e.ComputerDiagnosis == true).ToListAsync<Examination>();
             if (examList != null)
             {
                 return examList;
@@ -62,15 +63,45 @@ namespace DL
 
         public async Task<List<Examination>> GetByDate(DateTime date)
         {
-            List< Examination > examList = await myDB.Examinations.Where(e => e.ExaminationDate.Equals(date.Date)).ToListAsync<Examination>();
-            if (examList!=null)
+            List<Examination> examList = await myDB.Examinations.Where(e => e.ExaminationDate.Equals(date.Date)).ToListAsync<Examination>();
+            if (examList != null)
             {
                 return examList;
             }
             return null;
         }
 
-        public async Task<List<Examination>>GetAllExams()
+        public async Task<string> getDoctorNameById(int Id)
+        {
+            string doctorName;
+
+
+            using (SqlConnection sqlConnection1 = new SqlConnection("Server=DESKTOP-45L6QC9;Database=MicroscopicPicture1;Trusted_Connection=True;"))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    var result = cmd.Parameters.Add("@doctorId", SqlDbType.VarChar).Value = Id;
+
+                    cmd.CommandText = "get_docrtor_name";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = sqlConnection1;
+
+                    sqlConnection1.Open();
+
+                    //await cmd.ExecuteNonQueryAsync();
+
+                    string returnedValue = string.Empty;
+                    returnedValue = (string)await cmd.ExecuteScalarAsync();
+
+                    doctorName = returnedValue;
+                    return doctorName;
+                }
+
+
+
+            }
+        }
+            public async Task<List<Examination>> GetAllExams()
         {
             List<Examination> examList = await myDB.Examinations.ToListAsync();
             if (examList != null)
