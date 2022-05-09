@@ -14,5 +14,7 @@ namespace BL
         Task Put(Patient patient);
         Task Delete(int id);
         Task<List<Patient>> GetPatients(int userId);
+
+        Task<List<string>> GetAllPatientsIds();
     }
 }

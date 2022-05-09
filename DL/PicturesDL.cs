@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace DL
 {
-    public class PicturesDL:IPicturesDL
+    public class PicturesDL : IPicturesDL
     {
         MicroscopicPicture1Context myDB;
+        ExamDL examDL;
 
         public PicturesDL(MicroscopicPicture1Context _myDB)
         {
@@ -20,7 +21,7 @@ namespace DL
         {
             await myDB.PicturesCollections.AddAsync(picture);
             await myDB.SaveChangesAsync();
-           
+
             //שליחה לאלגוריתם
             //await myDB.Users.Where(u=> u.;
             //MailMessage message = new MailMessage();
@@ -52,8 +53,21 @@ namespace DL
             //    {
             //        throw ex;
             //    }
-            
-            
+
+
+        }
+
+        //public Task SaveUserImage(UserImage img)
+        //{
+
+        //        myDB.UserImages.Add(img);
+        //        myDB.SaveChanges();
+        //    return true;
+        //}
+
+        public async Task<bool> ImgExist(string linkToFile)
+        {
+            return await examDL.ImgExist(linkToFile);
         }
     }
 }

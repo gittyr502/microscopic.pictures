@@ -34,5 +34,10 @@ namespace BL
         {
             return await patientDL.GetPatients(userId);
         }
+
+        public async Task<List<string>> GetAllPatientsIds()
+        {
+            return await patientDL.GetAllPatientsIds();
+        }
     }
 }

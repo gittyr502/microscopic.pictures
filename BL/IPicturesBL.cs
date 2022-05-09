@@ -10,5 +10,7 @@ namespace BL
     public interface IPicturesBL
     {
         Task Post(PicturesCollection picture);
+        // bool SaveImage(UserImage img);
+        Task<bool> ValidateDuplicateFileName(string fileName);
     }
 }
