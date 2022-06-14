@@ -28,6 +28,8 @@ namespace BL
         public async Task<User> Get(string id, string password)
         {
             string salt = await _userDL.getSalt(id);
+            if (salt == null)
+                return null;
             password = _passwordHashHelper.HashPassword(password, salt, 1000, 8);
             User user= await _userDL.Get(id, password);
             if (user == null) 

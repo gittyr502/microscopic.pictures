@@ -69,7 +69,10 @@ namespace DL
 
         public async Task<string> getSalt(string id)
         {
-            User u1 = await myDB.Users.Where(u1 => u1.Id.ToString().Equals(id)).FirstOrDefaultAsync();
+            
+            User u1 = await myDB.Users.Where(u1 => u1.IdNumber.Equals(id)).FirstOrDefaultAsync();
+            if (u1 == null)
+                return null;
             return u1.Salt;
         }
 
