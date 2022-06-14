@@ -17,5 +17,6 @@ namespace DL
         Task<User> GetByEmail(string email);
         Task updatePassword(User u);
         Task<User> getByIdNumber(int id);
+        Task<string> getSalt(string id);
     }
 }

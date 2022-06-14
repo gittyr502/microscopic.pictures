@@ -67,6 +67,11 @@ namespace DL
             await myDB.SaveChangesAsync();
         }
 
+        public async Task<string> getSalt(string id)
+        {
+            User u1 = await myDB.Users.Where(u1 => u1.Id.ToString().Equals(id)).FirstOrDefaultAsync();
+            return u1.Salt;
+        }
 
         //public async Task sendCodePassword(string email)
         //{
