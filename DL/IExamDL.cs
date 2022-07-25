@@ -20,5 +20,7 @@ namespace DL
         Task<string> getDoctorNameById(int Id);
 
         Task<bool> ImgExist(string linkToFile);
+
+        Task Put(Examination _exam);
     }
 }

@@ -115,5 +115,11 @@ namespace DL
         {
             return await myDB.Examinations.AnyAsync(x => x.LinkToFile.Equals(linkToFile));
         }
+
+        public async Task Put(Examination _exam)
+        {
+            myDB.Examinations.Update(_exam);
+            await myDB.SaveChangesAsync();
+        }
     }
 }

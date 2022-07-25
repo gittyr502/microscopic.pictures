@@ -18,5 +18,7 @@ namespace BL
         Task<List<Examination>> GetByDate(DateTime date);
         Task<List<Examination>> GetAllExams();
         Task<string> getDoctorNameById(int id);
+
+        Task Put(Examination _exam);
     }
 }

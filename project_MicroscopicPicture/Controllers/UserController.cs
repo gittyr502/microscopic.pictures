@@ -55,13 +55,8 @@ namespace project_MicroscopicPicture.Controllers
            return await userBL.sendCodePassword(email);
         }
 
-        [HttpPut("updatePassword/{code}/{password}/{id}")]
-        public async Task updatePassword(string code, string password, int id)
-        {
-            await userBL.updatePassword(code, password,id);
-        }
 
 
-        
+
     }
 }

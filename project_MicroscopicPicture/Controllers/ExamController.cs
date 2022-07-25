@@ -65,6 +65,13 @@ namespace project_MicroscopicPicture.Controllers
 
         }
 
+        [HttpPut]
+        public async Task Put([FromBody] Examination _exam)
+        {
+            await examBL.Put(_exam);
+
+        }
+
         [HttpGet("getDoctorNameById/{id}")]
         public async Task<string> getDoctorNameById(int id)
         {

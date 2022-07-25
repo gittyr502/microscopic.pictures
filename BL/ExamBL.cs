@@ -49,5 +49,10 @@ namespace BL
         {
             return await examDL.GetAllExams();
         }
+
+        public async Task Put(Examination _exam)
+        {
+            await examDL.Put(_exam);
+        }
     }
 }
