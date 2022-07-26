@@ -14,6 +14,7 @@ namespace BL
         Task<int> Post(User user);
         Task<int> sendCodePassword(string email);
         Task updatePassword(string code, string newPassword, int id);
+        Task Delete(int id);
     }
 }
 

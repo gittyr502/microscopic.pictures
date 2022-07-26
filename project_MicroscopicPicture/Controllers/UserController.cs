@@ -16,7 +16,8 @@ namespace project_MicroscopicPicture.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
-    { IUserBL userBL;
+    {
+        IUserBL userBL;
         public UserController(IUserBL _userBL)
         {
             userBL = _userBL;
@@ -34,7 +35,7 @@ namespace project_MicroscopicPicture.Controllers
         }
 
         [HttpGet]
-        public async Task<List<User>>GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             return await userBL.GetAllUsers();
         }
@@ -47,13 +48,20 @@ namespace project_MicroscopicPicture.Controllers
             return await userBL.Post(user);
 
         }
-        
-        
+
+        [HttpPost("DeleteUser/{id}")]
+        public async Task DeleteUser(int id)
+        {
+            await userBL.Delete(id);
+        }
+
         [HttpGet("sendCodeToUpdatePassword/{email}")]
         public async Task<int> sendCodePassword(string email)
         {
-           return await userBL.sendCodePassword(email);
+            return await userBL.sendCodePassword(email);
         }
+
+
 
 
 

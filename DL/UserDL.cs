@@ -76,6 +76,17 @@ namespace DL
             return u1.Salt;
         }
 
+        public async Task Delete(int id)
+        {
+            User u = await myDB.Users.Where(u => u.Id.Equals(id)).FirstOrDefaultAsync();
+            if (u != null)
+            {
+                myDB.Users.Remove(u);
+                await myDB.SaveChangesAsync();
+            }
+
+        }
+
         //public async Task sendCodePassword(string email)
         //{
         //    User u = await myDB.Users.FindAsync(userId);

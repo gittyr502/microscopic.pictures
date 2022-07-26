@@ -70,6 +70,11 @@ namespace BL
             return await _userDL.Post(user); 
         }
 
+        public async Task Delete(int id)
+        {
+            await _userDL.Delete(id);
+        }
+
         public async Task<int> sendCodePassword(string email)
         {
             User u = await _userDL.GetByEmail(email);

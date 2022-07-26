@@ -18,5 +18,6 @@ namespace DL
         Task updatePassword(User u);
         Task<User> getByIdNumber(int id);
         Task<string> getSalt(string id);
+        Task Delete(int id);
     }
 }
